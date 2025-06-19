@@ -4,7 +4,7 @@ from PIL import Image
 import io
 
 # Load ONNX model
-onnx_session = ort.InferenceSession("detection/ai_models/ensemble_model_v1.0.0.onnx")
+onnx_session = ort.InferenceSession("detection/ai_models/ensemble_model_v1.0.1.onnx")
 
 # Configuration
 INPUT_SIZE = (224, 224)
