@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from .models import Detection
 
 class MultiImageUploadSerializer(serializers.Serializer):
     images = serializers.ListField(
@@ -12,3 +13,9 @@ class PredictionResponseSerializer(serializers.Serializer):
     predicted_class = serializers.CharField()
     confidence_score = serializers.FloatField()
     preprocessed_on = serializers.CharField()  # 'mobile' or 'backend'
+
+class DetectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Detection
+        fields = ('id', 'user', 'image', 'result', 'confidence_score', 'created_at')
+        read_only_fields = ('user',)
