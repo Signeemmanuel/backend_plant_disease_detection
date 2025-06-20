@@ -9,6 +9,8 @@ class Detection(models.Model):
     longitude = models.FloatField(null=True, blank=True)
     confidence_score = models.FloatField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    flagged = models.BooleanField(default=False)
+    flag_reason = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.user.username} - {self.result}'

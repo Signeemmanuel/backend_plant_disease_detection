@@ -17,5 +17,5 @@ class PredictionResponseSerializer(serializers.Serializer):
 class DetectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Detection
-        fields = ('id', 'user', 'image', 'result', 'confidence_score', 'created_at')
+        fields = ('id', 'user', 'image', 'result', 'confidence_score', 'created_at', 'flagged', 'flag_reason')
         read_only_fields = ('user',)
