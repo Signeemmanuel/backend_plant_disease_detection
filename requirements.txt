@@ -12,6 +12,7 @@ djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.0
 drf-yasg==1.21.10
 flatbuffers==25.2.10
+gunicorn==23.0.0
 humanfriendly==10.0
 inflection==0.5.1
 jmespath==1.0.1

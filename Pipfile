@@ -16,6 +16,7 @@ onnxruntime = "*"
 dj-database-url = "*"
 cloudinary = "*"
 whitenoise = "*"
+gunicorn = "*"
 
 [dev-packages]
 
