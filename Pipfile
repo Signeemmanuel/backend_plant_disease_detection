@@ -4,13 +4,19 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
 djangorestframework = "*"
-onnxruntime = "*"
-pillow = "*"
 psycopg2-binary = "*"
 django-environ = "*"
 drf-yasg = "*"
+django = "*"
+django-storages = "*"
+boto3 = "*"
+pillow = "*"
+onnxruntime = "*"
+dj-database-url = "*"
+cloudinary = "*"
+whitenoise = "*"
+gunicorn = "*"
 
 [dev-packages]
 

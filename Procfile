@@ -1,0 +1,1 @@
+web: gunicorn plant_disease_backend.wsgi # Replace 'myproject' with your actual project name
