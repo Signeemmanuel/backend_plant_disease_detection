@@ -41,6 +41,8 @@ env = environ.Env(
     POSTGRES_PASSWORD=(str, ''),
     POSTGRES_HOST=(str, ''),
     POSTGRES_PORT=(str, ''),
+    OPENWEATHERMAP_API_KEY=(str, ''),
+    NEWSAPI_API_KEY=(str, ''),
 )
 
 # Read .env file
@@ -84,6 +86,7 @@ INSTALLED_APPS = [
     # Your app
     'detection.apps.DetectionConfig',
     'users.apps.UsersConfig',
+    'info_services.apps.InfoServicesConfig',
 ]
 
 MIDDLEWARE = [
@@ -237,3 +240,15 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+# Django cache (simple locmem for now)
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
+# New environment variables
+OPENWEATHERMAP_API_KEY = env('OPENWEATHERMAP_API_KEY', default='')
+NEWSAPI_API_KEY = env('NEWSAPI_API_KEY', default='')

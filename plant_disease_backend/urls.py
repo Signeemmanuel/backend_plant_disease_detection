@@ -37,6 +37,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/predict/', include('detection.urls')),  # or direct to view
     path('api/users/', include('users.urls')),
+    path('api/', include('info_services.urls')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
 
