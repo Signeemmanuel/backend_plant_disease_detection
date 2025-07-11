@@ -27,6 +27,10 @@ class PredictAPIView(APIView):
         serializer = MultiImageUploadSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         images = serializer.validated_data['images']
+        
+        latitude = serializer.validated_data.get('latitude')
+        longitude = serializer.validated_data.get('longitude')
+        scan_type = serializer.validated_data.get('scan_type')
 
         results = []
 
@@ -42,20 +46,29 @@ class PredictAPIView(APIView):
 
             detection = Detection.objects.create(
                 user=request.user,
-                image=img,
-                result=pred["label"],
-                confidence_score=pred["confidence"]
+                image_name_in_phone = img.name,
+                image_url=img,
+                disease_id=pred["label"],
+                confidence_score=pred["confidence"],
+                longitude=longitude,
+                latitude=latitude,
+                scan_type=scan_type,
             )
+            
 
-            results.append({
-                "filename": img.name,
-                "predicted_class": pred["label"],
-                "confidence_score": pred["confidence"],
-            })
+            # results.append({
+            #     "filename": img.name,
+            #     "predicted_class": pred["label"],
+            #     "confidence_score": pred["confidence"],
+            # })
+            results.append(detection)
 
+            # Reset file pointer for the next iteration if needed (good practice)
             img.seek(0)
+            
+        response_serializer = DetectionSerializer(results, many=True)
 
-        return Response(results, status=status.HTTP_200_OK)
+        return Response(response_serializer.data, status=status.HTTP_200_OK)
 
 class DetectionHistoryView(generics.ListAPIView):
     serializer_class = DetectionSerializer

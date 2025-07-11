@@ -5,15 +5,17 @@ from cloudinary.models import CloudinaryField # Import CloudinaryField
 User = get_user_model()
 class Detection(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='detections')
-    image = CloudinaryField('image') # 'image' is a common default for CloudinaryField
+    image_name_in_phone = models.CharField(max_length=510)
+    image_url = CloudinaryField('image') # 'image' is a common default for CloudinaryField
     # image = models.ImageField(upload_to='detections/')    
-    result = models.CharField(max_length=255)
+    disease_id = models.CharField(max_length=255)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     confidence_score = models.FloatField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     flagged = models.BooleanField(default=False)
     flag_reason = models.TextField(null=True, blank=True)
+    scan_type = models.CharField(max_length=255) # 'phone or drone'
 
     def __str__(self):
         return f'{self.user.username} - {self.result}'

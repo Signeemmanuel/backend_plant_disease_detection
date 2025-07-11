@@ -7,6 +7,9 @@ class MultiImageUploadSerializer(serializers.Serializer):
         allow_empty=False,
         help_text="Upload one or more images for prediction."
     )
+    latitude = serializers.FloatField(required=False)
+    longitude = serializers.FloatField(required=False)
+    scan_type = serializers.CharField(max_length=255)
 
 class PredictionResponseSerializer(serializers.Serializer):
     filename = serializers.CharField()
@@ -17,5 +20,6 @@ class PredictionResponseSerializer(serializers.Serializer):
 class DetectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Detection
-        fields = ('id', 'user', 'image', 'result', 'confidence_score', 'created_at', 'flagged', 'flag_reason')
+        # fields = ('id', 'user', 'image', 'result', 'confidence_score', 'created_at', 'flagged', 'flag_reason')
+        exclude = []
         read_only_fields = ('user',)
